@@ -1,0 +1,4 @@
+speechrecognition
+pyttsx3
+PyAudio
+PySoundFile
