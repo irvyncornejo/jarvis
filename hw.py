@@ -1,4 +1,6 @@
-from gpiozero import LightSensor, LED as Relay, MCP3008
+from gpiozero import LightSensor
+from gpiozero import LED as Relay
+from gpiozero import MCP3008
 from time import sleep
 
 iluminacion = LightSensor(25)
