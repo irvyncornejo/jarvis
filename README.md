@@ -19,20 +19,20 @@ Proyecto para generar acciones mediante comandos de voz, implementando raspberry
         source env/bin/activate
 
 - Después de crear el entorno es necesario instalar.
-```bash
-sudo apt-get install libffi-dev
 
-sudo apt-get install libssl-dev
+        sudo apt-get install libffi-dev
 
-sudo apt-get install libzbar-dev libzbar0
+        sudo apt-get install libssl-dev
 
-python -m pip install --upgrade google-assistant-library google-assistant-sdk[samples]
+        sudo apt-get install libzbar-dev libzbar0
 
-python -m pip install --upgrade google-auth-oauthlib[tool]
+        python -m pip install --upgrade google-assistant-library google-assistant-sdk[samples]
 
-google-oauthlib-tool --client-secrets cred.json --scope https://www.googleapis.com/auth/assistant-sdk-prototype --scope https://www.googleapis.com/auth/gcm --save --headless
+        python -m pip install --upgrade google-auth-oauthlib[tool]
 
-sudo apt-get install libportaudio2
+        google-oauthlib-tool --client-secrets cred.json --scope https://www.googleapis.com/auth/assistant-sdk-prototype --scope https://www.googleapis.com/auth/gcm --save --headless
 
-chromium-browser --disable-web-security --user-data-dir '/home/pi'
-```
+        sudo apt-get install libportaudio2
+
+        chromium-browser --disable-web-security --user-data-dir '/home/pi'
+
