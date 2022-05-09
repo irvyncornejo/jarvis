@@ -36,3 +36,5 @@ Proyecto para generar acciones mediante comandos de voz, implementando raspberry
 
         chromium-browser --disable-web-security --user-data-dir '/home/pi'
 
+## Mover archivos de local a raspberry
+        scp -r  app  pi@192.168.1.79:Documentos/jarvis
