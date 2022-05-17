@@ -38,3 +38,6 @@ Proyecto para generar acciones mediante comandos de voz, implementando raspberry
 
 ## Mover archivos de local a raspberry
         scp -r  app  pi@192.168.1.79:Documentos/jarvis
+
+### Pyenv ref
+        https://www.liquidweb.com/kb/how-to-install-pyenv-on-ubuntu-18-04/
