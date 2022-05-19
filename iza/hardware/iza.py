@@ -24,7 +24,16 @@ class Iza:
         feet_right.angle = 0
         feet_left.angle = 0
         sleep(1)
-    
+    def __slice_message(self, message:str)->list:
+        lenght=len(message)
+        messages=[]
+        init=0
+        final=15 
+        messages.append(message[init:final])
+        messages.append(message[final:final+1+(lenght%16)])
+        return messages
+
+
     def change_state_led(self, color:str, value:bool=False)-> None:
         #TODO add function for pwm control
         led = leds[color]
@@ -40,8 +49,14 @@ class Iza:
 
     def send_message_lcd(self, message:str, row:int=1, time:int=1, clear:bool=False) -> None:
         length_message = len(message)
+        my_lcd.lcd_clear()
         if length_message > 16:
-            sleep(time)
+            messages = self.__slice_message(message)
+            for message in messages:
+                my_lcd.lcd_display_string(message, row)
+                sleep(time)
+                my_lcd.lcd_clear()
+        
         else:
             my_lcd.lcd_display_string(f'{message}', row)
             sleep(time)
