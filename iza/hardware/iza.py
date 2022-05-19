@@ -5,9 +5,10 @@ from gpiozero import Buzzer
 from gpiozero import Servo
 from gpiozero import AngularServo
 
-import I2C_LCD_driver
+from .I2C_LCD_driver import lcd
+#import I2C_LCD_driver
 
-my_lcd = I2C_LCD_driver.lcd()
+my_lcd = lcd()
 leds = {
     'blue': LED(14), 
     'green': LED(15)
