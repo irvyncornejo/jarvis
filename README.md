@@ -41,3 +41,6 @@ Proyecto para generar acciones mediante comandos de voz, implementando raspberry
 
 ### Pyenv ref
         https://www.liquidweb.com/kb/how-to-install-pyenv-on-ubuntu-18-04/
+
+### Dependencias por probar después
+        pyaudio
