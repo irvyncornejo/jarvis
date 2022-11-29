@@ -130,3 +130,5 @@ dmypy.json
 
 google-credencials/cred.json
 .google-credencials/cred.json
+
+chatbot/db.sqlite3

@@ -1,5 +1,6 @@
 flask
 SpeechRecognition
 pyttsx3
-chatterbot==1.0.4
-pytz
+PyAudio
+pyaudio
+pyserial
