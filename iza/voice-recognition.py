@@ -8,10 +8,10 @@ iza = Iza()
 
 def main():
     try:
-        sleep(1)
+        sleep(0.5)
         with sr.Microphone() as source:
             voice = lister.listen(source)
-            command = lister.recognize_google(voice)
+            command = lister.recognize_google(voice, language='es-MX')
             print(command)
             if command.strip() == 'IC':
                 iza.send_message_lcd('Con I de ...', 1, 2)
