@@ -37,7 +37,7 @@ Proyecto para generar acciones mediante comandos de voz, implementando raspberry
         chromium-browser --disable-web-security --user-data-dir '/home/pi'
 
 ## Mover archivos de local a raspberry
-        scp -r  app  pi@192.168.1.79:Documentos/jarvis
+        scp -r  app  pi@<ip_host>:Documentos/jarvis
 
 ### Pyenv ref
         https://www.liquidweb.com/kb/how-to-install-pyenv-on-ubuntu-18-04/
