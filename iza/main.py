@@ -17,7 +17,9 @@ class Actions(Iza):
         if _separe_command[0] == 'isa':
             self.change_state_led('green', True)
             sleep(2)
-        self.change_state_led('green', False)
+            if 'baila' in _separe_command[1]:
+                self.dance(1)
+        self.change_state_led('green', False) 
         actions.change_state_led('blue', True)
 
     def run(self, command:str):
@@ -49,4 +51,8 @@ if __name__=='__main__':
         command = main()
         if command or command != '':
             actions.run(command)
+
+        if actions.read_distance() < 30:
+            actions.send_message_lcd(message='Hola, Soy Iza', time=2, clear=False)
+
         actions.send_message_lcd('Escuchando!!!!')

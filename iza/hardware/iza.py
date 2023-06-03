@@ -1,8 +1,8 @@
 from time import sleep
+from typing import List
 from gpiozero import LED
 from gpiozero import DistanceSensor
 from gpiozero import Buzzer
-from gpiozero import Servo
 from gpiozero import AngularServo
 
 from .I2C_LCD_driver import lcd
@@ -23,16 +23,20 @@ class Iza:
         self._my_lcd = lcd()
         self._buzzer = Buzzer(buzzer_pin)
         self._ultrasonico = DistanceSensor(ultrasonic_echo, ultrasonic_trigger)#echo, trigger
-        # self._feet_right = AngularServo(servo_feet_right, min_angle=-90, max_angle=90)
-        # self._feet_left = AngularServo(servo_feet_left, min_angle=-90, max_angle=90)
-        self._feet_right = Servo(servo_feet_right)
-        self._feet_left = Servo(servo_feet_left)
-        self._feet_right.angle = 0
-        self._feet_left.angle = 0
-        self._leds = {
-            'blue': LED(led_blue), 
-            'green': LED(led_green)
-        }
+        self._feet_right = AngularServo(servo_feet_right, min_angle=-90, max_angle=90)
+        self._feet_left = AngularServo(servo_feet_left, min_angle=-90, max_angle=90)
+        self._leg_right = AngularServo(servo_leg_right, min_angle=-90, max_angle=90)
+        self._leg_left = AngularServo(servo_leg_left, min_angle=-90, max_angle=90)
+        self._servo_pins = [servo_feet_right, servo_feet_left, servo_leg_right, servo_leg_left]
+        self._leds = {'blue': LED(led_blue), 'green': LED(led_green)}
+        self._list_servos:List[AngularServo] = [
+            self._feet_right,
+            self._feet_left,
+            self._leg_right,
+            self._leg_left
+        ]
+        self._set_init_servos()
+        
 
     def __slice_message(self, message:str)->list:
         lenght=len(message)
@@ -43,6 +47,8 @@ class Iza:
         messages.append(message[final:final+1+(lenght%16)])
         return messages
 
+    def _read_analog_channel(self, channel:int)->None:
+        pass
 
     def change_state_led(self, color:str, value:bool=False)-> None:
         #TODO add function for pwm control
@@ -73,11 +79,34 @@ class Iza:
 
         self._my_lcd.lcd_clear() if clear else ''
 
-    def move_feet(self) -> None:
-        self._feet_right.mid()
-        self._feet_left.mid()
-        sleep(2)
-        self._feet_right.min()
-        self._feet_left.min()
-        sleep(2)
+    def _set_init_servos(self)->None:
+        for servo in self._list_servos:
+            sleep(0.2)
+            servo.angle = 0
+        self._close_servos()
+    
+    def _close_servos(self)->None:
+        for servo in self._list_servos:
+            servo.close()
+    
+    def _start_servos(self)->None:
+        for i, servo in enumerate(self._list_servos):
+            servo.__init__(
+                self._servo_pins[i],
+                min_angle=-90,
+                max_angle=90
+            )
 
+    def dance(self, routine:int):
+        self._start_servos()
+        if routine == 1:
+            angles = [(-60, 60), (60, -60)]
+            for _ in range(7):
+                self._leg_left.angle= angles[0][0]
+                self._leg_right.angle = angles[0][1]
+                sleep(1)
+
+        self._set_init_servos()
+
+    def show_temperature(self)->None:
+        pass
